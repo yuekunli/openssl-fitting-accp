@@ -2509,7 +2509,7 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
 };
 
 #define NUM_SN 1311
-static const unsigned int sn_objs[NUM_SN] = {
+static const unsigned int sn_objs[NUM_SN] = {  // NIDs of objects sorted by short-name
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
      916,    /* "AES-128-CBC-HMAC-SHA1" */
@@ -3824,7 +3824,7 @@ static const unsigned int sn_objs[NUM_SN] = {
 };
 
 #define NUM_LN 1311
-static const unsigned int ln_objs[NUM_LN] = {
+static const unsigned int ln_objs[NUM_LN] = {  // NIDs of objects sorted by long-name
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
      368,    /* "Acceptable OCSP Responses" */
@@ -5139,7 +5139,7 @@ static const unsigned int ln_objs[NUM_LN] = {
 };
 
 #define NUM_OBJ 1177
-static const unsigned int obj_objs[NUM_OBJ] = {
+static const unsigned int obj_objs[NUM_OBJ] = {  // NIDs of objects sorted by serialized OID
        0,    /* OBJ_undef                        0 */
      181,    /* OBJ_iso                          1 */
      393,    /* OBJ_joint_iso_ccitt              OBJ_joint_iso_itu_t */

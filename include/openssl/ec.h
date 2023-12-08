@@ -530,6 +530,10 @@ EC_GROUP *EC_GROUP_new_from_ecpkparameters(const ECPKPARAMETERS *params);
 ECPKPARAMETERS *EC_GROUP_get_ecpkparameters(const EC_GROUP *group,
                                             ECPKPARAMETERS *params);
 
+EC_GROUP *EC_GROUP_new_by_serialized_OID(uint8_t* p, int length);
+
+void EC_GROUP_get_der_encoded_curve_OID(uint8_t *p, int length, EC_GROUP* group);
+
 /********************************************************************/
 /*               handling of internal curves                        */
 /********************************************************************/
