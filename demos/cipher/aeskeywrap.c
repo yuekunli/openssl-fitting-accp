@@ -11,6 +11,15 @@
  * Simple aes wrap encryption demonstration program.
  */
 
+/*
+* https://www.openssl.org/docs/man3.1/man3/EVP_aes_256_wrap.html
+*
+* AES key wrap with 128, 192 and 256 bit keys, 
+* as according to RFC 3394 section 2.2.1 (“wrap”) and
+* RFC 5649 section 4.1 (“wrap with padding”) respectively.
+*/
+
+
 #include <stdio.h>
 #include <openssl/err.h>
 #include <openssl/bio.h>
@@ -26,6 +35,8 @@ static const unsigned char wrap_key[] = {
 };
 
 /* Unique initialisation vector */
+// LiYK: The IV is not used as part of the nonce as in counter mode,
+// this is used as the initial block, so the length of IV is exactly the block size which is 16 bytes
 static const unsigned char wrap_iv[] = {
     0x99, 0xaa, 0x3e, 0x68, 0xed, 0x81, 0x73, 0xa0, 0xee, 0xd0, 0x66, 0x84,
     0x99, 0xaa, 0x3e, 0x68,
@@ -37,6 +48,12 @@ static const unsigned char wrap_pt[] = {
     0x34, 0xec, 0x40, 0xbc, 0x28, 0x3f, 0xa4, 0x5e, 0xd8, 0x99, 0xe4, 0x5d,
     0x5e, 0x7a, 0xc4, 0xe6, 0xca, 0x7b, 0xa5, 0xb7,
 };
+
+// LiYK: according to RFC 5649, if the input length is multiple of 8, there will be no padding
+// in this example, input is 32-byte long, there should be no padding.
+// but why the encryption output is longer than 32-byte?
+// Note that I didn't read the wrapping algorithm, I only did the padding algorithm.
+// Maybe the wrapping alone would produce 40 bytes when input has 32 bytes.
 
 /* Expected ciphertext value */
 static const unsigned char wrap_ct[] = {

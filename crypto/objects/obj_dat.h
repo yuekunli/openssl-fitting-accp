@@ -9,6 +9,19 @@
  * https://www.openssl.org/source/license.html
  */
 
+
+/*
+ * These are serialized OIDs
+ * The human-readable (numeric-dot notation) OID for MD5 is:
+ * 1.2.840.113549.2.5 
+ * How to conver such human-readable format to binary format?
+ * https://learn.microsoft.com/en-us/windows/win32/seccertenroll/about-object-identifier
+ * Note that these are not DER encoded OIDs.
+ * DER is essentially a type-length-value encoding.
+ * The "type" for an OID is 0x06.
+ * The length follows that 0x06 then followed by the actual OID in binary format.
+*/
+
 /* Serialized OID's */
 static const unsigned char so[8476] = {
     0x2A,0x86,0x48,0x86,0xF7,0x0D,                 /* [    0] OBJ_rsadsi */
