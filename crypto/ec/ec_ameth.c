@@ -719,30 +719,3 @@ int ECParameters_print(BIO *bp, const EC_KEY *x)
 {
     return do_EC_KEY_print(bp, x, 4, EC_KEY_PRINT_PARAM);
 }
-
-EC_GROUP *EC_GROUP_new_by_serialized_OID(uint8_t* p, int length)
-{
-    // make a dummy ASN1_OBJECT
-    ASN1_OBJECT dummy = {"dummy", "dummy", NID_undef, length, (const unsigned char*)p};
-
-    // look for an object matching the serialized OID
-    int nid_found = OBJ_obj2nid(&dummy);
-
-    if (nid_found == NID_undef)
-        return NULL;
-
-    return EC_GROUP_new_by_curve_name_ex(NULL, NULL, nid_found);
-}
-
-void EC_GROUP_get_der_encoded_curve_OID(uint8_t *p, int length, EC_GROUP* group)
-{
-    int curve_nid = EC_GROUP_get_curve_name(group);
-
-    ASN1_OBJECT* asn1_obj = OBJ_nid2obj(curve_nid);
-
-    int oid_length = asn1_obj->length;
-
-    *p++ = 0x06;
-    *p++ = oid_length;
-    memcpy(p, asn1_obj->data, oid_length);
-}
